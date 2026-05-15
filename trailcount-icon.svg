@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 60" width="48" height="60">
+  <!-- TrailCount — standalone leaf icon -->
+  <!-- Use at any size; scales cleanly to 16px favicon or large display -->
+
+  <path d="M24 57 C12 47 7 33 12 18 C15 9 19 5 24 4 C29 5 33 9 36 18 C41 33 36 47 24 57Z" fill="#6a9e5e"/>
+  <path d="M24 57 C29 48 32 37 32 26 C32 16 29 9 24 4 C29 5 33 9 36 18 C41 33 36 47 24 57Z" fill="#4e8040" opacity="0.25"/>
+  <!-- Center vein -->
+  <path d="M24 6 Q24 32 24 56" fill="none" stroke="#ddd8c4" stroke-width="1.1" stroke-linecap="round"/>
+  <!-- Vein pair 1 -->
+  <path d="M24 18 Q18 21 12 24" fill="none" stroke="#ddd8c4" stroke-width="0.7" stroke-linecap="round" opacity="0.9"/>
+  <path d="M24 18 Q30 21 36 23" fill="none" stroke="#ddd8c4" stroke-width="0.7" stroke-linecap="round" opacity="0.9"/>
+  <!-- Vein pair 2 -->
+  <path d="M24 30 Q17 34 10 38" fill="none" stroke="#ddd8c4" stroke-width="0.7" stroke-linecap="round" opacity="0.85"/>
+  <path d="M24 30 Q31 34 38 37" fill="none" stroke="#ddd8c4" stroke-width="0.7" stroke-linecap="round" opacity="0.85"/>
+  <!-- Vein pair 3 -->
+  <path d="M24 42 Q18 46 13 50" fill="none" stroke="#ddd8c4" stroke-width="0.6" stroke-linecap="round" opacity="0.7"/>
+  <path d="M24 42 Q30 46 35 49" fill="none" stroke="#ddd8c4" stroke-width="0.6" stroke-linecap="round" opacity="0.7"/>
+</svg>

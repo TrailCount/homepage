@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#6a9e5e">
+  <title>TrailCount — Open Trail-Counter Platform</title>
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="icon" type="image/svg+xml" href="trailcount-icon.svg">
+  <meta name="description" content="TrailCount measures hiker traffic on wilderness trails with open hardware and open software. Sponsored by Adirondack Wilderness Advocates.">
+  <style>
+    /* TrailCount palette:
+       #6a9e5e primary green
+       #1e3a18 dark text
+       #ddd8c4 accent cream
+       #4e8040 muted green
+    */
+    *, *::before, *::after { box-sizing: border-box; }
+    html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+      color: #1e3a18;
+      background: #fdfcf7;
+    }
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 64px 24px;
+    }
+    header {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 56px;
+    }
+    .logo {
+      width: 320px;
+      max-width: 100%;
+      height: auto;
+    }
+    h1 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 2.25rem;
+      line-height: 1.2;
+      margin: 0 0 24px 0;
+      color: #1e3a18;
+      font-weight: 400;
+    }
+    p {
+      font-size: 1.05rem;
+      margin: 0 0 18px 0;
+    }
+    .deployment {
+      background: #ddd8c4;
+      border-left: 4px solid #6a9e5e;
+      padding: 20px 24px;
+      border-radius: 4px;
+      margin: 48px 0;
+    }
+    .deployment-label {
+      margin: 0 0 8px 0;
+      font-size: 0.85rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #4e8040;
+      font-weight: 600;
+    }
+    .deployment a {
+      font-size: 1.2rem;
+      color: #1e3a18;
+      font-weight: 500;
+      text-decoration: none;
+    }
+    .deployment a:hover {
+      color: #6a9e5e;
+    }
+    a {
+      color: #6a9e5e;
+      transition: color 0.15s ease;
+    }
+    a:hover {
+      color: #1e3a18;
+    }
+    .contact {
+      margin-top: 48px;
+      font-size: 1rem;
+      color: #4e8040;
+    }
+    footer {
+      margin-top: 80px;
+      padding-top: 32px;
+      border-top: 1px solid #ddd8c4;
+      color: #4e8040;
+      font-size: 0.9rem;
+      text-align: center;
+    }
+    @media (max-width: 600px) {
+      .container { padding: 48px 20px; }
+      h1 { font-size: 1.85rem; }
+      .logo { width: 240px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <img class="logo" src="trailcount-logo-primary.svg" alt="TrailCount">
+    </header>
+
+    <main>
+      <h1>Open trail-counter platform.</h1>
+
+      <p>TrailCount measures hiker traffic on wilderness trails. Hardware devices detect hikers locally and upload data daily over cellular. A dashboard shows trail popularity over time by trail and by wilderness area.</p>
+
+      <p>The project is sponsored by Adirondack Wilderness Advocates and built in partnership with RIT senior-project teams. Hardware and software are open source.</p>
+
+      <div class="deployment">
+        <p class="deployment-label">Currently deployed at</p>
+        <a href="https://adk.trailcount.io">Adirondack Wilderness Advocates →</a>
+      </div>
+
+      <p class="contact">
+        Questions? <a href="mailto:contact@trailcount.io">contact@trailcount.io</a>
+      </p>
+    </main>
+
+    <footer>
+      Sponsored by Adirondack Wilderness Advocates
+    </footer>
+  </div>
+</body>
+</html>
