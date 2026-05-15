@@ -2,3 +2,14 @@
 *.swp
 .idea/
 .vscode/
+
+# Terraform local state — keep state file out of git for now (single
+# operator; matches the project-wide convention until a remote backend
+# is wired up per the umbrella project's Open decision #8).
+terraform/.terraform/
+terraform/.terraform.lock.hcl
+terraform/terraform.tfstate
+terraform/terraform.tfstate.*
+terraform/*.tfvars
+!terraform/*.tfvars.example
+terraform/crash.log
