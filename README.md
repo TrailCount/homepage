@@ -21,9 +21,33 @@ here are mirrored copies from the umbrella project's `branding/trailcount/`
 ## Deploy
 
 The site is served from AWS (S3 + CloudFront + ACM cert) on the
-`trailcount.io` apex domain, with DNS still managed at Squarespace.
-Deploy automation is TBD — see the umbrella project's `CUTOVER_PLAN.md`
-Track C, which originally scoped this as a Squarespace landing page.
+`trailcount.io` apex domain, with DNS managed at Squarespace
+(DNS-only — no Squarespace hosting plan).
+
+Terraform under `terraform/` is the source of truth. To deploy a
+content change:
+
+```bash
+cd terraform
+AWS_PROFILE=trail-admin terraform apply
+```
+
+A `null_resource` in `s3.tf` keyed on a hash of the homepage files
+(`index.html`, `favicon.ico`, `trailcount-icon.svg`,
+`trailcount-logo-primary.svg`) re-runs `aws s3 sync` whenever any of
+those changes, then invalidates the CloudFront cache. So editing the
+HTML and running `terraform apply` is the full deploy.
+
+## Email forwarding
+
+The same Terraform stack also wires up `contact@trailcount.io` →
+`craigmcg.acc@gmail.com` via SES inbound + a Python Lambda
+(`terraform/lambda/forwarder.py`) + SES outbound. The forwarder
+rewrites `From` to `forwarder@trailcount.io` and preserves the
+original sender in `Reply-To`. SES is in sandbox mode — sufficient
+for forwarding to a single verified Gmail; expanding to other
+recipients would require either verifying each one or filing an
+AWS support request to leave sandbox.
 
 ## Branding
 
