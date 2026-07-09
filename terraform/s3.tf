@@ -61,21 +61,29 @@ resource "aws_s3_bucket_policy" "site_cloudfront_read" {
 # changes. Same pattern as the webapp's null_resource.deploy_react_app.
 resource "null_resource" "deploy_homepage" {
   triggers = {
-    content_hash = sha256(join("", [
-      for f in sort([
-        "index.html",
-        "favicon.ico",
-        "trailcount-icon.svg",
-        "trailcount-logo-primary.svg",
-      ]) : filemd5("${path.module}/../${f}")
-    ]))
+    content_hash = sha256(join("", concat(
+      [
+        for f in sort([
+          "awa-logo.png",
+          "index.html",
+          "tour.html",
+          "favicon.ico",
+          "trailcount-icon.svg",
+          "trailcount-logo-primary.svg",
+        ]) : filemd5("${path.module}/../${f}")
+      ],
+      [for f in sort(fileset("${path.module}/../tour", "**")) : filemd5("${path.module}/../tour/${f}")]
+    )))
   }
 
   provisioner "local-exec" {
     command = <<-EOT
       aws s3 sync ${path.module}/.. s3://${aws_s3_bucket.site.bucket} \
         --exclude '*' \
+        --include 'awa-logo.png' \
         --include 'index.html' \
+        --include 'tour.html' \
+        --include 'tour/*' \
         --include 'favicon.ico' \
         --include 'trailcount-icon.svg' \
         --include 'trailcount-logo-primary.svg' \

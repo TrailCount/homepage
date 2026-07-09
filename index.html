@@ -87,6 +87,19 @@
       font-size: 1rem;
       color: #4e8040;
     }
+    .pillars {
+      margin: 0 0 24px;
+      padding-left: 1.25em;
+    }
+    .pillars li {
+      margin: 10px 0;
+    }
+    .pillars li::marker {
+      color: #6a9e5e;
+    }
+    .pillars b {
+      color: #1e3a18;
+    }
     footer {
       margin-top: 80px;
       padding-top: 32px;
@@ -95,6 +108,19 @@
       font-size: 0.9rem;
       text-align: center;
     }
+    footer .awa {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: #4e8040;
+    }
+    footer .awa img {
+      height: 80px;
+      width: auto;
+    }
+    footer .awa:hover span { text-decoration: underline; }
     @media (max-width: 600px) {
       .container { padding: 48px 20px; }
       h1 { font-size: 1.85rem; }
@@ -109,14 +135,21 @@
     </header>
 
     <main>
-      <h1>Counting hikers on wilderness trails.</h1>
+      <h1>Understanding our footprint in wild places.</h1>
 
-      <p>TrailCount helps land stewards understand how their trails are used. Battery-powered sensors in the field count hikers passing by and report in daily over cellular. The dashboard plots traffic over time — per trail and per wilderness area — so changes in use show up as patterns, not anecdotes.</p>
+      <p>TrailCount visualizes human usage patterns across pristine natural areas. Small, self-sufficient counters observe quietly at the trailhead; the platform turns their daily reports into a living picture of where people go, when they go, and how use is shifting — so the people who care for these places can see impact forming while there is still time to act.</p>
+
+      <ul class="pillars">
+        <li><b>Measure unobtrusively.</b> Battery-powered sensors count passing hikers a season at a time and report in daily over cellular — no cameras, no wires, nothing asked of visitors.</li>
+        <li><b>See patterns, not anecdotes.</b> Usage flows across a living map and time-series views: hotspots, seasonal rhythms, and multi-year trends, per trail and per wilderness area.</li>
+        <li><b>Protect what is pristine.</b> Concentrated pressure surfaces early, so stewardship — trail hardening, education, rerouting — goes where the land needs it first.</li>
+      </ul>
 
       <p>TrailCount is sponsored by Adirondack Wilderness Advocates and built in collaboration with RIT senior-project teams.</p>
 
       <div class="deployment">
         <p class="deployment-label">To learn more</p>
+        <a href="/tour.html">Take the product tour →</a><br>
         <a href="https://adk.trailcount.io">Explore the live dashboard →</a>
       </div>
 
@@ -126,7 +159,10 @@
     </main>
 
     <footer>
-      Sponsored by Adirondack Wilderness Advocates
+      <a class="awa" href="https://www.adirondackwilderness.org/" target="_blank" rel="noopener">
+        <img src="awa-logo.png" alt="Adirondack Wilderness Advocates logo" />
+        <span>Sponsored by Adirondack Wilderness Advocates</span>
+      </a>
     </footer>
   </div>
 </body>

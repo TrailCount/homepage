@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TrailCount — Product Tour</title>
+  <link rel="icon" href="favicon.ico" sizes="any" />
+  <link rel="icon" href="trailcount-icon.svg" type="image/svg+xml" />
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+      color: #1e3a18;
+      background: #fdfcf7;
+      line-height: 1.55;
+    }
+    a { color: #4e8040; }
+
+    header.site {
+      display: flex; align-items: center; gap: 14px;
+      padding: 14px 22px; border-bottom: 1px solid #ddd8c4;
+      background: #fdfcf7; position: sticky; top: 0; z-index: 10;
+    }
+    header.site img { height: 34px; }
+    header.site .crumb { font-size: 0.95rem; color: #4e8040; }
+    header.site .crumb a { text-decoration: none; }
+    header.site .spacer { flex: 1; }
+    header.site .demo-link {
+      font-size: 0.9rem; text-decoration: none; border: 1.5px solid #6a9e5e;
+      border-radius: 6px; padding: 6px 12px; color: #1e3a18; white-space: nowrap;
+    }
+    header.site .demo-link:hover { background: #6a9e5e; color: #fff; }
+
+    .layout { display: flex; min-height: calc(100vh - 63px); }
+
+    nav.toc {
+      width: 250px; flex-shrink: 0; border-right: 1px solid #ddd8c4;
+      padding: 22px 0 40px; position: sticky; top: 63px;
+      max-height: calc(100vh - 63px); overflow-y: auto;
+    }
+    nav.toc h2 {
+      font-family: Georgia, "Times New Roman", serif; font-size: 0.85rem;
+      text-transform: uppercase; letter-spacing: 0.08em; color: #4e8040;
+      margin: 0 0 8px; padding: 0 20px;
+    }
+    nav.toc a {
+      display: block; padding: 7px 20px 7px 32px; text-decoration: none;
+      color: #1e3a18; font-size: 0.93rem; border-left: 3px solid transparent;
+    }
+    nav.toc a .num { color: #9aa78f; font-variant-numeric: tabular-nums; margin-right: 8px; }
+    nav.toc a.active { border-left-color: #4e8040; background: #f2f0e4; font-weight: 600; }
+    nav.toc a:hover { background: #f2f0e4; }
+
+    main {
+      flex: 1; min-width: 0; padding: 34px 42px 60px;
+      max-width: 980px;
+    }
+    .chapter { display: none; }
+    .chapter.active { display: block; }
+    .chapter .eyebrow {
+      font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.1em;
+      color: #4e8040; font-weight: 600; margin-bottom: 6px;
+    }
+    .chapter h1 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 2rem; margin: 0 0 14px; line-height: 1.2; text-wrap: balance;
+    }
+    .chapter p { max-width: 68ch; margin: 0 0 14px; }
+    .chapter ul { max-width: 68ch; margin: 0 0 14px; padding-left: 1.3em; }
+    .chapter li { margin: 5px 0; }
+    .chapter li::marker { color: #6a9e5e; }
+
+    figure { margin: 22px 0; }
+    figure img {
+      width: 100%; height: auto; display: block; border: 1px solid #ddd8c4;
+      border-radius: 8px; box-shadow: 0 6px 24px rgba(30, 58, 24, 0.10);
+      cursor: zoom-in;
+    }
+    figcaption { font-size: 0.85rem; color: #6b7a63; margin-top: 8px; }
+
+    .callouts { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; margin: 18px 0; }
+    .callout {
+      background: #f2f0e4; border: 1px solid #ddd8c4; border-radius: 8px;
+      padding: 12px 15px; font-size: 0.9rem;
+    }
+    .callout b { display: block; margin-bottom: 3px; color: #1e3a18; }
+
+    code, .url {
+      font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 0.86em;
+      background: #f2f0e4; border: 1px solid #ddd8c4; border-radius: 4px;
+      padding: 0.08em 0.4em; word-break: break-all;
+    }
+
+    .pager {
+      display: flex; justify-content: space-between; gap: 14px;
+      margin-top: 38px; padding-top: 20px; border-top: 1px solid #ddd8c4;
+    }
+    .pager a {
+      text-decoration: none; border: 1.5px solid #6a9e5e; border-radius: 8px;
+      padding: 10px 16px; color: #1e3a18; font-size: 0.93rem; max-width: 46%;
+    }
+    .pager a:hover { background: #6a9e5e; color: #fff; }
+    .pager a span { display: block; font-size: 0.75rem; color: #4e8040; }
+    .pager a:hover span { color: #eaf3e6; }
+    .pager a.next { margin-left: auto; text-align: right; }
+    .pager a[hidden] { display: none; }
+
+    .kbd-hint { font-size: 0.78rem; color: #9aa78f; text-align: center; margin-top: 16px; }
+
+    /* Lightbox */
+    #lightbox {
+      display: none; position: fixed; inset: 0; z-index: 50;
+      background: rgba(20, 30, 16, 0.88); cursor: zoom-out;
+      align-items: center; justify-content: center; padding: 3vh 3vw;
+    }
+    #lightbox.open { display: flex; }
+    #lightbox img { max-width: 100%; max-height: 100%; border-radius: 6px; }
+
+    @media (max-width: 860px) {
+      .layout { flex-direction: column; }
+      nav.toc { width: 100%; position: static; max-height: none; border-right: none; border-bottom: 1px solid #ddd8c4; padding: 12px 0; }
+      nav.toc a { display: inline-block; border-left: none; padding: 6px 12px; }
+      nav.toc a.active { background: #f2f0e4; border-radius: 6px; }
+      nav.toc h2 { display: none; }
+      main { padding: 22px 18px 50px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site">
+    <a href="/"><img src="trailcount-logo-primary.svg" alt="TrailCount" /></a>
+    <span class="crumb"><a href="/">Home</a> / Product tour</span>
+    <span class="spacer"></span>
+    <a class="demo-link" href="https://demo.trailcount.io" target="_blank" rel="noopener">Open the live demo →</a>
+  </header>
+
+  <div class="layout">
+    <nav class="toc" id="toc"><h2>Contents</h2></nav>
+
+    <main id="main">
+
+      <section class="chapter" data-title="Welcome">
+        <div class="eyebrow">Product tour</div>
+        <h1>Trail-use intelligence for wild places</h1>
+        <p>
+          TrailCount pairs rugged, solar-friendly trail counters with a cloud platform that turns
+          raw hiker detections into decisions: where pressure is building, which trailheads carry
+          the load, and how use moves with the seasons. This short tour walks through every page
+          of the dashboard using the live demo — the same software that serves real devices in the
+          Adirondacks today.
+        </p>
+        <div class="callouts">
+          <div class="callout"><b>Graph</b> Time-series analysis of any counter, trailhead, or whole wilderness area.</div>
+          <div class="callout"><b>Map</b> The park in one view: state-land areas, trailheads, DEC trails, and a usage heat layer.</div>
+          <div class="callout"><b>Admin</b> Curate trailheads and areas, manage counters and dashboard users.</div>
+        </div>
+        <figure>
+          <img src="tour/map-overview.jpg" alt="TrailCount map view of the Adirondack Park" loading="lazy" />
+          <figcaption>The map view on sign-in: Adirondack state lands colored by classification, ready to explore.</figcaption>
+        </figure>
+        <p>
+          Use the contents on the left, the arrows below, or your keyboard’s ← → keys to page through.
+        </p>
+      </section>
+
+      <section class="chapter" data-title="Signing in">
+        <div class="eyebrow">Getting in</div>
+        <h1>Sign in and land on the map</h1>
+        <p>
+          Access is by invitation — an administrator creates your account (more on that in the Admin
+          chapter). Signing in drops you straight onto the map, framed to the whole park, with your
+          filter selections remembered per session as you move between views.
+        </p>
+        <figure>
+          <img src="tour/login.jpg" alt="TrailCount sign-in page" loading="lazy" />
+          <figcaption>The sign-in page. Administrators provision accounts; there is no self-service signup.</figcaption>
+        </figure>
+      </section>
+
+      <section class="chapter" data-title="The filter panel">
+        <div class="eyebrow">Shared controls</div>
+        <h1>One filter panel, every view</h1>
+        <p>
+          The left panel reads identically on the Graph and Map: a date range, the wilderness
+          <b>Areas</b> you care about, and the individual <b>Counters</b> within them. Below the
+          divider live the view-specific controls — grouping and combining on the Graph, the usage
+          heat controls on the Map.
+        </p>
+        <ul>
+          <li><b>Dates</b> default to the trailing 52 weeks, ending yesterday (today’s data hasn’t uploaded yet).</li>
+          <li><b>Areas</b> is a multi-select — pick several to compare them side by side.</li>
+          <li><b>Counters</b> auto-fills with the selected areas’ counters; prune or search to focus.</li>
+          <li>The footer shows the exact build you’re running — handy when confirming a fresh deploy.</li>
+        </ul>
+      </section>
+
+      <section class="chapter" data-title="Map view">
+        <div class="eyebrow">Spatial context</div>
+        <h1>The park, its lands, and its trailheads</h1>
+        <p>
+          The map layers the things stewards actually reason about: official state-land unit
+          boundaries (from the Adirondack Park Agency’s land classification, simplified so shared
+          borders stay coincident), DEC trail lines colored by blaze, and trailhead markers colored
+          by recent traffic. Selecting an area outlines it with a glow, frames the view, and reveals
+          its trails and trailheads.
+        </p>
+        <figure>
+          <img src="tour/map-area.jpg" alt="High Peaks Wilderness selected on the map" loading="lazy" />
+          <figcaption>High Peaks Wilderness selected: boundary glow, DEC trails by blaze color, trailheads colored by 30-day traffic.</figcaption>
+        </figure>
+        <ul>
+          <li>Ten switchable basemaps (Esri topo by default) — terrain, satellite, USGS, and more.</li>
+          <li>Select multiple areas and the view frames all of them together.</li>
+          <li>Click any trailhead for its details — and a one-click jump to its graph.</li>
+        </ul>
+      </section>
+
+      <section class="chapter" data-title="Usage heat">
+        <div class="eyebrow">Where the impact is</div>
+        <h1>Heat that follows the trail</h1>
+        <p>
+          Most heat maps draw circles around points. TrailCount’s usage layer follows the actual
+          trail network: each trailhead’s glow walks its DEC trails into the backcountry, fading
+          with distance the way real visitation does. A busy flagship trailhead runs wide, deep,
+          and red; a quiet one is a thin yellow thread that ends at the first bend.
+        </p>
+        <figure>
+          <img src="tour/map-heat.jpg" alt="Usage heat corridors on the map" loading="lazy" />
+          <figcaption>Corridor heat: width, reach, and color all scale with each trailhead’s traffic.</figcaption>
+        </figure>
+        <ul>
+          <li><b>Width</b> and <b>Reach</b> set the busiest trailhead’s footprint; everything else scales beneath it.</li>
+          <li>Curation is live — reject a trailhead or fix its trails and the heat updates instantly.</li>
+        </ul>
+      </section>
+
+      <section class="chapter" data-title="Graph view">
+        <div class="eyebrow">The numbers</div>
+        <h1>From one counter to a whole wilderness</h1>
+        <p>
+          The Graph plots hiker counts over any date range, grouped by hour up to year. Select a
+          whole area and it stays readable: the five busiest counters get their own lines and
+          everything else folds into a single “All others” series — with the busy lines painting
+          first while the long tail loads.
+        </p>
+        <figure>
+          <img src="tour/graph-area.jpg" alt="Graph view for a wilderness area" loading="lazy" />
+          <figcaption>An area’s year at a glance: top five counters plus the combined rest, weekly buckets.</figcaption>
+        </figure>
+        <ul>
+          <li>Pick individual counters for exact comparisons, or check <b>Combine trails</b> for one total line.</li>
+          <li>Grouping adapts to your range — from hourly detail to multi-year trends.</li>
+        </ul>
+      </section>
+
+      <section class="chapter" data-title="Comparing areas">
+        <div class="eyebrow">Side by side</div>
+        <h1>One line per area</h1>
+        <p>
+          Select several areas and the graph answers the managerial question directly: which area
+          carries more use, and when? Each area’s counters sum into a single named line —
+          High Peaks against Vanderwhacker, wilderness against wild forest, season against season.
+        </p>
+        <figure>
+          <img src="tour/graph-compare.jpg" alt="Comparing two areas on the graph" loading="lazy" />
+          <figcaption>Two areas compared over a year — one summed line each.</figcaption>
+        </figure>
+      </section>
+
+      <section class="chapter" data-title="Admin">
+        <div class="eyebrow">Stewardship operations</div>
+        <h1>Curate the catalog, manage the fleet</h1>
+        <p>
+          Admin is where the system stays true to the ground: confirm or reject derived trailheads,
+          edit the trails each one serves (picked from the official DEC trail names, so map linkage
+          never breaks on a typo), maintain areas, and watch counter health — battery, firmware,
+          and last call-in for every device.
+        </p>
+        <figure>
+          <img src="tour/admin-trailheads.jpg" alt="Admin trailheads table" loading="lazy" />
+          <figcaption>The trailhead catalog: search, filter by review status, edit in place.</figcaption>
+        </figure>
+        <p>
+          The <b>Users</b> tab manages dashboard access itself: create accounts, and mark who is an
+          administrator. Only admins see this page — everyone else gets the Graph and Map, read-only.
+        </p>
+        <figure>
+          <img src="tour/admin-users.jpg" alt="Admin users tab" loading="lazy" />
+          <figcaption>User management: provision accounts and grant or revoke admin in one click.</figcaption>
+        </figure>
+      </section>
+
+      <section class="chapter" data-title="Deep links">
+        <div class="eyebrow">Share exactly what you see</div>
+        <h1>Every view has an address</h1>
+        <p>
+          Areas and trailheads are linkable, so a finding can be handed to a colleague as a URL.
+          The map and graph link into each other, too — click a trailhead’s pin and jump straight
+          to its numbers.
+        </p>
+        <ul>
+          <li><span class="url">/map?area=High Peaks Wilderness</span> — the map, framed to an area with its trails and trailheads shown.</li>
+          <li><span class="url">/map?trailhead=&lt;id&gt;</span> — fly directly to one trailhead’s pin.</li>
+          <li><span class="url">/dashboard?area=High Peaks Wilderness</span> — the graph, preloaded with an area’s counters.</li>
+          <li><span class="url">/dashboard?trail=&lt;id&gt;</span> — one counter’s series, ready to read.</li>
+        </ul>
+        <figure>
+          <img src="tour/map-popup.jpg" alt="Trailhead popup with a link to its graph" loading="lazy" />
+          <figcaption>A trailhead popup on the map — one click to its graph.</figcaption>
+        </figure>
+        <p>
+          That’s the tour. <a href="https://demo.trailcount.io" target="_blank" rel="noopener">Open the live demo</a>
+          and try it with a year of realistic data — or <a href="mailto:contact@trailcount.io">get in touch</a>
+          to talk about counting your trails.
+        </p>
+      </section>
+
+      <div class="pager">
+        <a id="prev" href="#"><span>Previous</span><span id="prev-title"></span></a>
+        <a id="next" class="next" href="#"><span>Next</span><span id="next-title"></span></a>
+      </div>
+      <div class="kbd-hint">Tip: page with your ← → arrow keys</div>
+    </main>
+  </div>
+
+  <div id="lightbox"><img alt="" /></div>
+
+  <script>
+    const chapters = Array.from(document.querySelectorAll(".chapter"));
+    const toc = document.getElementById("toc");
+    const prev = document.getElementById("prev");
+    const next = document.getElementById("next");
+
+    chapters.forEach((ch, i) => {
+      const a = document.createElement("a");
+      a.href = "#" + (i + 1);
+      a.innerHTML = '<span class="num">' + String(i + 1).padStart(2, "0") + "</span>" + ch.dataset.title;
+      toc.appendChild(a);
+    });
+    const tocLinks = Array.from(toc.querySelectorAll("a"));
+
+    function show(i) {
+      i = Math.max(0, Math.min(chapters.length - 1, i));
+      chapters.forEach((ch, j) => ch.classList.toggle("active", j === i));
+      tocLinks.forEach((a, j) => a.classList.toggle("active", j === i));
+      prev.hidden = i === 0;
+      next.hidden = i === chapters.length - 1;
+      if (i > 0) {
+        prev.href = "#" + i;
+        document.getElementById("prev-title").textContent = chapters[i - 1].dataset.title;
+      }
+      if (i < chapters.length - 1) {
+        next.href = "#" + (i + 2);
+        document.getElementById("next-title").textContent = chapters[i + 1].dataset.title;
+      }
+      window.scrollTo({ top: 0 });
+    }
+
+    function fromHash() {
+      const n = parseInt(location.hash.slice(1), 10);
+      show(Number.isFinite(n) ? n - 1 : 0);
+    }
+    window.addEventListener("hashchange", fromHash);
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowRight" && !next.hidden) location.hash = next.getAttribute("href");
+      if (e.key === "ArrowLeft" && !prev.hidden) location.hash = prev.getAttribute("href");
+    });
+
+    // Click-to-zoom screenshots
+    const lb = document.getElementById("lightbox");
+    const lbImg = lb.querySelector("img");
+    document.querySelectorAll("figure img").forEach((img) => {
+      img.addEventListener("click", () => { lbImg.src = img.src; lb.classList.add("open"); });
+    });
+    lb.addEventListener("click", () => lb.classList.remove("open"));
+
+    fromHash();
+  </script>
+</body>
+</html>
