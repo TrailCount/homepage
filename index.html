@@ -80,6 +80,14 @@
       font-size: 0.9rem;
       color: #4e8040;
     }
+    /* `.deployment a` sets 1.2rem/500 for the CTAs; keep inline links in the
+       note at the note's own size rather than inheriting the CTA treatment. */
+    .deployment-note a {
+      font-size: inherit;
+      font-weight: inherit;
+      color: #4e8040;
+      text-decoration: underline;
+    }
     a {
       color: #6a9e5e;
       transition: color 0.15s ease;
@@ -155,8 +163,9 @@
       <div class="deployment">
         <p class="deployment-label">To learn more</p>
         <a href="/tour.html">Take the product tour →</a><br>
-        <a href="https://test.demo.trailcount.io">Explore the demo dashboard →</a>
-        <p class="deployment-note">Running on simulated data while our first trailhead counter comes online.</p>
+        <a href="https://demo.trailcount.io">Explore the demo dashboard →</a><br>
+        <a href="https://adk.trailcount.io">See our live trailhead →</a>
+        <p class="deployment-note">The demo runs on simulated data. The Garden trailhead in Keene Valley has been reporting real hiker counts daily since August 2026. Both dashboards require a sign-in — <a href="mailto:contact@trailcount.io">request access</a>.</p>
       </div>
 
       <p class="contact">

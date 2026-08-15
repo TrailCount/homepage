@@ -33,10 +33,11 @@ AWS_PROFILE=trail-admin terraform apply
 ```
 
 A `null_resource` in `s3.tf` keyed on a hash of the homepage files
-(`index.html`, `favicon.ico`, `trailcount-icon.svg`,
-`trailcount-logo-primary.svg`) re-runs `aws s3 sync` whenever any of
-those changes, then invalidates the CloudFront cache. So editing the
-HTML and running `terraform apply` is the full deploy.
+(`index.html`, `tour.html`, `awa-logo.png`, `favicon.ico`,
+`trailcount-icon.svg`, `trailcount-logo-primary.svg`, and everything
+under `tour/`) re-runs `aws s3 sync` whenever any of those changes, then
+invalidates the CloudFront cache. So editing the HTML and running
+`terraform apply` is the full deploy.
 
 ## Email forwarding
 
