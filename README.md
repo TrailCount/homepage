@@ -20,9 +20,10 @@ here are mirrored copies from the umbrella project's `branding/trailcount/`
 
 ## Deploy
 
-The site is served from AWS (S3 + CloudFront + ACM cert) on the
-`trailcount.io` apex domain, with DNS managed at Squarespace
-(DNS-only — no Squarespace hosting plan).
+The site is served from AWS (S3 + CloudFront + ACM cert) on both
+`www.trailcount.io` and the `trailcount.io` apex (Route 53 aliases to the
+same distribution). Squarespace is the registrar only — no Squarespace
+hosting plan. The public zone is `../terraform/domain/`.
 
 Terraform under `terraform/` is the source of truth. To deploy a
 content change:

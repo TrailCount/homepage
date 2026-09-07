@@ -1,27 +1,12 @@
 # ─────────────────────────────────────────────────────────────────────────
-# Two-wave Squarespace DNS dance:
-#
-# Wave 1 (cert validation): the first `terraform apply` will pause at
-#   aws_acm_certificate_validation. In a separate terminal, run:
-#       terraform output -json cert_validation_records
-#   Take the CNAMEs and add them to Squarespace DNS for trailcount.io.
-#   ACM polls, validates within ~5 min, apply resumes and creates
-#   CloudFront.
-#
-# Wave 2 (traffic routing): after apply completes, add user-facing DNS
-#   records at Squarespace:
-#       www.trailcount.io  CNAME  ->  <cname_target>
-#       trailcount.io      ALIAS  ->  <cname_target>     (apex)
-#   Squarespace doesn't natively support ALIAS/ANAME for external
-#   targets. Recommended apex handling:
-#     - Use Squarespace's "Domain Forwarding" feature to forward
-#       trailcount.io -> https://www.trailcount.io  (301 redirect)
-#     - That keeps the SSL cert validation happy (cert covers apex
-#       too) and the canonical URL becomes www.trailcount.io.
+# Public DNS is the workspace domain stack (../../terraform/domain/dns.tf),
+# not this one. These outputs are the checklist of records that zone must
+# contain for the homepage cert, CloudFront aliases, and inbound mail.
+# Apex and www are A/AAAA aliases to CloudFront — no Squarespace 301.
 # ─────────────────────────────────────────────────────────────────────────
 
 output "cert_validation_records" {
-  description = "DNS CNAMEs to add to Squarespace so ACM can validate the trailcount.io cert"
+  description = "DNS CNAMEs that must exist in terraform/domain so ACM can renew the trailcount.io cert"
   value = [
     for o in aws_acm_certificate.site.domain_validation_options : {
       name  = o.resource_record_name
@@ -32,7 +17,7 @@ output "cert_validation_records" {
 }
 
 output "cname_target" {
-  description = "Point trailcount.io and www.trailcount.io at this CloudFront hostname (CNAME for www, forwarding for apex)"
+  description = "CloudFront hostname for the Route 53 A/AAAA aliases on trailcount.io and www"
   value       = aws_cloudfront_distribution.site.domain_name
 }
 
@@ -46,14 +31,14 @@ output "s3_bucket" {
   value       = aws_s3_bucket.site.bucket
 }
 
-# ── Email DNS records to add at Squarespace ─────────────────────────────
+# ── Email DNS records (live copies are in terraform/domain/dns.tf) ─────
 output "ses_domain_verification_token" {
-  description = "Add this as TXT _amazonses.trailcount.io at Squarespace to prove domain ownership to SES"
+  description = "TXT _amazonses.trailcount.io — already in the domain stack"
   value       = aws_ses_domain_identity.trailcount.verification_token
 }
 
 output "ses_dkim_records" {
-  description = "Three CNAMEs at Squarespace so SES can sign outbound mail with DKIM"
+  description = "Three DKIM CNAMEs — already in the domain stack"
   value = [
     for t in aws_ses_domain_dkim.trailcount.dkim_tokens : {
       name  = "${t}._domainkey.${local.email_domain}."
@@ -64,7 +49,7 @@ output "ses_dkim_records" {
 }
 
 output "ses_mx_record" {
-  description = "Add this MX record at Squarespace so SES can receive incoming mail for the domain"
+  description = "MX for inbound SES — already in the domain stack"
   value = {
     name     = "@"
     type     = "MX"
@@ -74,6 +59,6 @@ output "ses_mx_record" {
 }
 
 output "ses_spf_update" {
-  description = "Update the existing TXT @ SPF record from 'v=spf1 -all' to this value so SES is authorized to send"
+  description = "SPF this stack would publish. Live DNS uses ~all (see terraform/domain/dns.tf); do not paste this -all value"
   value       = "v=spf1 include:amazonses.com -all"
 }

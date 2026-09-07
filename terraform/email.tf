@@ -4,17 +4,10 @@
 # Architecture:
 #   sender → SES inbound (MX) → S3 → S3 trigger → Lambda → SES outbound
 #
-# Two DNS waves are needed at Squarespace, similar to the cert validation
-# dance from the homepage hosting setup:
-#
-# Wave 1 (domain verification + DKIM, done before email starts flowing):
-#   - TXT  _amazonses     ← from `ses_domain_verification_token` output
-#   - 3 × CNAME <token>._domainkey  ← from `ses_dkim_tokens` output
-#   - SPF: update the existing v=spf1 -all TXT @ to include SES sending
-#       v=spf1 include:amazonses.com -all
-#
-# Wave 2 (inbound MX, done once verification is confirmed):
-#   - MX  @  10  inbound-smtp.us-east-1.amazonaws.com
+# DNS for verification, DKIM, SPF, and inbound MX lives in the workspace
+# domain stack (../../terraform/domain/dns.tf), already applied. Live SPF
+# is `~all`; this stack's older output still says `-all` and is not the
+# serving record.
 #
 # Plus one manual SES action: confirm the FORWARD_TO Gmail address from
 # the verification link AWS sends. Required while SES is in sandbox mode.

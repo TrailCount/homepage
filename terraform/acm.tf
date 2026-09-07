@@ -1,9 +1,7 @@
 # ACM certificate for trailcount.io apex + www.trailcount.io. Must be
-# in us-east-1 to be usable by CloudFront. Validated via DNS CNAMEs
-# that go in Squarespace's DNS panel — see the terraform outputs in
-# outputs.tf for the records to add (two-wave dance: first apply pauses
-# at aws_acm_certificate_validation while you paste the CNAMEs into
-# Squarespace; ACM polls DNS, validates, apply resumes).
+# in us-east-1 to be usable by CloudFront. Validation CNAMEs live in
+# the workspace domain stack (../../terraform/domain/dns.tf), including
+# the www SAN record in foreign_validation.
 
 resource "aws_acm_certificate" "site" {
   domain_name               = local.apex_domain
@@ -25,9 +23,8 @@ resource "aws_acm_certificate" "site" {
 resource "aws_acm_certificate_validation" "site" {
   certificate_arn = aws_acm_certificate.site.arn
 
-  # No validation_record_fqdns argument: ACM validates by polling DNS,
-  # which works for the externally-managed Squarespace zone as long as
-  # the user adds the CNAMEs (see outputs).
+  # No validation_record_fqdns argument: ACM validates by polling DNS.
+  # Records are in the Route 53 zone, not created by this stack.
   timeouts {
     create = "30m"
   }
