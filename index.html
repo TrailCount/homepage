@@ -88,6 +88,19 @@
       color: #4e8040;
       text-decoration: underline;
     }
+    .tool {
+      margin: 0 0 16px 0;
+    }
+    .tool:last-child {
+      margin-bottom: 0;
+    }
+    .tool a {
+      display: inline-block;
+    }
+    .tool .deployment-note {
+      display: block;
+      margin: 6px 0 0 0;
+    }
     a {
       color: #6a9e5e;
       transition: color 0.15s ease;
@@ -166,6 +179,18 @@
         <a href="https://demo.trailcount.io">Explore the demo dashboard →</a><br>
         <a href="https://adk.trailcount.io">See our live trailhead →</a>
         <p class="deployment-note">The demo runs on simulated data. The Garden trailhead in Keene Valley has been reporting real hiker counts daily since August 2026. Both dashboards require a sign-in — <a href="mailto:contact@trailcount.io">request access</a>.</p>
+      </div>
+
+      <div class="deployment">
+        <p class="deployment-label">Maps of the Park</p>
+        <p class="tool">
+          <a href="https://remoteness.trailcount.io">Remoteness Explorer →</a>
+          <span class="deployment-note">How far is each acre of the Adirondack Park from the nearest motorized access — a road, ATV trail, snowmobile trail, or motorized water? Click a road out of the network and watch remote core grow or fragment.</span>
+        </p>
+        <p class="tool">
+          <a href="https://steepness.trailcount.io">Steepness Explorer →</a>
+          <span class="deployment-note">DEC hiking trails coloured by grade, computed from USGS 3DEP along the same trail overlay the TrailCount map draws. Filter by unit, trail type, and a “hide gentler than” slider.</span>
+        </p>
       </div>
 
       <p class="contact">
