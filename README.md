@@ -8,6 +8,8 @@ tenant-agnostic. Replaces the original plan to host this on Squarespace.
 ```
 homepage/
 ├── index.html                       single-page site, inline CSS
+├── tour.html                        product tour of the dashboard
+├── tour/                            screenshots used by tour.html
 ├── trailcount-logo-primary.svg      hero logo (mirrored from branding/trailcount/)
 ├── trailcount-icon.svg              tab favicon SVG fallback
 ├── favicon.ico                      multi-resolution favicon

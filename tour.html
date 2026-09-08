@@ -152,13 +152,14 @@
           hiker counts daily since August 2026.
         </p>
         <div class="callouts">
-          <div class="callout"><b>Graph</b> Time-series analysis of any counter, trailhead, or whole wilderness area.</div>
           <div class="callout"><b>Map</b> The park in one view: state-land areas, trailheads, DEC trails, and a usage heat layer.</div>
+          <div class="callout"><b>Graph</b> Time-series and typical-pattern views of any counter, trailhead, or whole wilderness area.</div>
+          <div class="callout"><b>Report</b> The same selection as a sortable table, with CSV export.</div>
           <div class="callout"><b>Admin</b> Curate trailheads and areas, manage counters and dashboard users.</div>
         </div>
         <figure>
           <img src="tour/map-overview.jpg" alt="TrailCount map view of the Adirondack Park" loading="lazy" />
-          <figcaption>The map view on sign-in: Adirondack state lands colored by classification, ready to explore.</figcaption>
+          <figcaption>The map on sign-in: Adirondack state lands colored by classification, ready to explore.</figcaption>
         </figure>
         <p>
           Use the contents on the left, the arrows below, or your keyboard’s ← → keys to page through.
@@ -170,8 +171,9 @@
         <h1>Sign in and land on the map</h1>
         <p>
           Access is by invitation — an administrator creates your account (more on that in the Admin
-          chapter). Signing in drops you straight onto the map, framed to the whole park, with your
-          filter selections remembered per session as you move between views.
+          chapter). Signing in drops you onto the map, framed to the whole park, with your filter
+          selections remembered per session as you move between views. Password reset is self-serve
+          from the sign-in page.
         </p>
         <figure>
           <img src="tour/login.jpg" alt="TrailCount sign-in page" loading="lazy" />
@@ -183,15 +185,16 @@
         <div class="eyebrow">Shared controls</div>
         <h1>One filter panel, every view</h1>
         <p>
-          The left panel reads identically on the Graph and Map: a date range, the wilderness
+          The left panel reads identically on the Map, Graph, and Report: a date range, the wilderness
           <b>Areas</b> you care about, and the individual <b>Counters</b> within them. Below the
-          divider live the view-specific controls — grouping and combining on the Graph, the usage
-          heat controls on the Map.
+          divider live the view-specific controls — the <b>View</b> menu and grouping on Graph and
+          Report, the overlay layers and heat sliders on the Map.
         </p>
         <ul>
-          <li><b>Dates</b> default to the trailing 52 weeks, ending yesterday (today’s data hasn’t uploaded yet).</li>
+          <li><b>Dates</b> default to the last 30 days, ending yesterday (today’s data hasn’t uploaded yet).</li>
           <li><b>Areas</b> is a multi-select — pick several to compare them side by side.</li>
           <li><b>Counters</b> auto-fills with the selected areas’ counters; prune or search to focus.</li>
+          <li><b>View</b> (Graph and Report) switches among over-time, typical-hour, typical-weekday, seasonal, and week-over-week lenses.</li>
           <li>The footer shows the exact build you’re running — handy when confirming a fresh deploy.</li>
         </ul>
       </section>
@@ -208,9 +211,10 @@
         </p>
         <figure>
           <img src="tour/map-area.jpg" alt="High Peaks Wilderness selected on the map" loading="lazy" />
-          <figcaption>High Peaks Wilderness selected: boundary glow, DEC trails by blaze color, trailheads colored by 30-day traffic.</figcaption>
+          <figcaption>High Peaks Wilderness selected: boundary glow, DEC trails by type, trailheads colored by 30-day traffic.</figcaption>
         </figure>
         <ul>
+          <li>The <b>Layers</b> panel toggles state-land classifications, DEC parking lots, and trail-usage heat.</li>
           <li>Ten switchable basemaps (Esri topo by default) — terrain, satellite, USGS, and more.</li>
           <li>Select multiple areas and the view frames all of them together.</li>
           <li>Click any trailhead for its details — and a one-click jump to its graph.</li>
@@ -227,10 +231,11 @@
           and red; a quiet one is a thin yellow thread that ends at the first bend.
         </p>
         <figure>
-          <img src="tour/map-heat.jpg" alt="Usage heat corridors on the map" loading="lazy" />
-          <figcaption>Corridor heat: width, reach, and color all scale with each trailhead’s traffic.</figcaption>
+          <img src="tour/map-heat.jpg" alt="Usage heat corridors on the High Peaks map" loading="lazy" />
+          <figcaption>Corridor heat over High Peaks: width, reach, and color all scale with each trailhead’s traffic.</figcaption>
         </figure>
         <ul>
+          <li><b>Usage (absolute)</b> is yellow-to-red by traffic. <b>Vs median</b> is blue below / red above the typical trail.</li>
           <li><b>Width</b> and <b>Reach</b> set the busiest trailhead’s footprint; everything else scales beneath it.</li>
           <li>Curation is live — reject a trailhead or fix its trails and the heat updates instantly.</li>
         </ul>
@@ -240,18 +245,46 @@
         <div class="eyebrow">The numbers</div>
         <h1>From one counter to a whole wilderness</h1>
         <p>
-          The Graph plots hiker counts over any date range, grouped by hour up to year. Select a
-          whole area and it stays readable: the five busiest counters get their own lines and
-          everything else folds into a single “All others” series — with the busy lines painting
-          first while the long tail loads.
+          The Graph’s default <b>Over time</b> view plots hiker counts over any date range, grouped
+          by hour up to year. Select a whole area and it stays readable: the five busiest counters
+          get their own lines and everything else folds into a single “All others” series — with
+          the busy lines painting first while the long tail loads.
         </p>
         <figure>
           <img src="tour/graph-area.jpg" alt="Graph view for a wilderness area" loading="lazy" />
           <figcaption>An area’s year at a glance: top five counters plus the combined rest, weekly buckets.</figcaption>
         </figure>
         <ul>
+          <li>A marker at zero is a quiet day the counter called in. A gap is a day it did not.</li>
           <li>Pick individual counters for exact comparisons, or check <b>Combine trails</b> for one total line.</li>
-          <li>Grouping adapts to your range — from hourly detail to multi-year trends.</li>
+          <li><b>Group by</b> adapts to your range — day for a month, week for a year — and can always be overridden.</li>
+        </ul>
+      </section>
+
+      <section class="chapter" data-title="Typical patterns">
+        <div class="eyebrow">The shape of use</div>
+        <h1>When people go, not just how many</h1>
+        <p>
+          Over time is one lens. The <b>View</b> menu folds the same window into the shapes
+          stewards actually ask about — typical hour, typical weekday, the season’s curve —
+          averaged in Eastern Time and skipping days the counter did not call in, so downtime
+          never looks like a quiet trail.
+        </p>
+        <figure>
+          <img src="tour/graph-dow.jpg" alt="Day-of-week average for High Peaks Wilderness" loading="lazy" />
+          <figcaption>Day of week: High Peaks’ weekend signature, averaged across a year.</figcaption>
+        </figure>
+        <figure>
+          <img src="tour/graph-hod.jpg" alt="Hour-of-day average for High Peaks Wilderness" loading="lazy" />
+          <figcaption>Hour of day: arrivals peak in the early morning, then taper through the afternoon.</figcaption>
+        </figure>
+        <figure>
+          <img src="tour/graph-weeks.jpg" alt="Weeks compared for High Peaks Wilderness" loading="lazy" />
+          <figcaption>Weeks compared: each week of the window on a Sunday–Saturday axis, older weeks lighter.</figcaption>
+        </figure>
+        <ul>
+          <li><b>Day of year</b> and <b>Week of year</b> show the season’s shape — when it starts, peaks, and tapers.</li>
+          <li><b>Combine trails</b> still sums the selected counters first, then averages the combined series.</li>
         </ul>
       </section>
 
@@ -269,6 +302,21 @@
         </figure>
       </section>
 
+      <section class="chapter" data-title="Report">
+        <div class="eyebrow">The table twin</div>
+        <h1>Totals you can sort and export</h1>
+        <p>
+          Report is the Graph as a table, over the same dates, areas, and counters.
+          <b>Totals</b> is one row per trailhead for the window — sortable, with a grand total.
+          <b>By period</b> is one row per trailhead × bin, using the same grouping as the Graph.
+          <b>Export CSV</b> downloads exactly what’s on screen.
+        </p>
+        <figure>
+          <img src="tour/report-totals.jpg" alt="Report totals for High Peaks Wilderness" loading="lazy" />
+          <figcaption>Visitor totals for High Peaks, sorted by visits — ready to export.</figcaption>
+        </figure>
+      </section>
+
       <section class="chapter" data-title="Admin">
         <div class="eyebrow">Stewardship operations</div>
         <h1>Curate the catalog, manage the fleet</h1>
@@ -283,12 +331,13 @@
           <figcaption>The trailhead catalog: search, filter by review status, edit in place.</figcaption>
         </figure>
         <p>
-          The <b>Users</b> tab manages dashboard access itself: create accounts, and mark who is an
-          administrator. Only admins see this page — everyone else gets the Graph and Map, read-only.
+          The <b>Users</b> tab manages dashboard access itself: create accounts, grant or revoke
+          admin, and enable or disable a login without deleting it. Only admins see this page —
+          everyone else gets the Map, Graph, and Report, read-only.
         </p>
         <figure>
           <img src="tour/admin-users.jpg" alt="Admin users tab" loading="lazy" />
-          <figcaption>User management: provision accounts and grant or revoke admin in one click.</figcaption>
+          <figcaption>User management: provision accounts, grant admin, and enable or disable access.</figcaption>
         </figure>
       </section>
 
@@ -297,18 +346,19 @@
         <h1>Every view has an address</h1>
         <p>
           Areas and trailheads are linkable, so a finding can be handed to a colleague as a URL.
-          The map and graph link into each other, too — click a trailhead’s pin and jump straight
+          Map, Graph, and Report share the same query — click a trailhead’s pin and jump straight
           to its numbers.
         </p>
         <ul>
           <li><span class="url">/map?area=High Peaks Wilderness</span> — the map, framed to an area with its trails and trailheads shown.</li>
           <li><span class="url">/map?trailhead=&lt;id&gt;</span> — fly directly to one trailhead’s pin.</li>
           <li><span class="url">/dashboard?area=High Peaks Wilderness</span> — the graph, preloaded with an area’s counters.</li>
-          <li><span class="url">/dashboard?trail=&lt;id&gt;</span> — one counter’s series, ready to read.</li>
+          <li><span class="url">/dashboard?trailhead=&lt;id&gt;</span> — one trailhead’s series, ready to read.</li>
+          <li><span class="url">/report?area=High Peaks Wilderness</span> — the same selection as a table.</li>
         </ul>
         <figure>
           <img src="tour/map-popup.jpg" alt="Trailhead popup with a link to its graph" loading="lazy" />
-          <figcaption>A trailhead popup on the map — one click to its graph.</figcaption>
+          <figcaption>A trailhead popup on the map — recent visits, and one click to its graph.</figcaption>
         </figure>
         <p>
           That’s the tour. <a href="https://demo.trailcount.io" target="_blank" rel="noopener">Open the demo</a>
