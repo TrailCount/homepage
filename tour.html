@@ -144,12 +144,13 @@
         <div class="eyebrow">Product tour</div>
         <h1>Trail-use intelligence for wild places</h1>
         <p>
-          TrailCount pairs rugged, solar-friendly trail counters with a cloud platform that turns
+          TrailCount pairs rugged, battery-powered trail counters with a cloud platform that turns
           raw hiker detections into decisions: where pressure is building, which trailheads carry
-          the load, and how use moves with the seasons. This short tour walks through every page
-          of the dashboard using the demo, populated with simulated data — the same software
-          now serving a real counter at The Garden trailhead in Keene Valley, which has reported
-          hiker counts daily since August 2026.
+          the load, and how use moves with the seasons. An infrared sensor logs each passer-by to
+          an SD card; once a day the unit wakes and uploads over LTE-M cellular — no cameras, no
+          solar panel, no visitor interaction. This short tour walks through every page of the
+          dashboard using the demo, populated with simulated data — the same software that
+          serves live counters in the field.
         </p>
         <div class="callouts">
           <div class="callout"><b>Map</b> The park in one view: state-land areas, trailheads, DEC trails, and a usage heat layer.</div>
@@ -227,8 +228,8 @@
         <p>
           Most heat maps draw circles around points. TrailCount’s usage layer follows the actual
           trail network: each trailhead’s glow walks its DEC trails into the backcountry, fading
-          with distance the way real visitation does. A busy flagship trailhead runs wide, deep,
-          and red; a quiet one is a thin yellow thread that ends at the first bend.
+          with distance along the trail. A busy flagship trailhead runs wide, deep, and red; a
+          quiet one is a thin yellow thread.
         </p>
         <figure>
           <img src="tour/map-heat.jpg" alt="Usage heat corridors on the High Peaks map" loading="lazy" />
@@ -237,7 +238,7 @@
         <ul>
           <li><b>Usage (absolute)</b> is yellow-to-red by traffic. <b>Vs median</b> is blue below / red above the typical trail.</li>
           <li><b>Width</b> and <b>Reach</b> set the busiest trailhead’s footprint; everything else scales beneath it.</li>
-          <li>Curation is live — reject a trailhead or fix its trails and the heat updates instantly.</li>
+          <li>Curation feeds the heat — reject a trailhead or fix its trails and the glow follows the catalog.</li>
         </ul>
       </section>
 
@@ -246,9 +247,10 @@
         <h1>From one counter to a whole wilderness</h1>
         <p>
           The Graph’s default <b>Over time</b> view plots hiker counts over any date range, grouped
-          by hour up to year. Select a whole area and it stays readable: the five busiest counters
-          get their own lines and everything else folds into a single “All others” series — with
-          the busy lines painting first while the long tail loads.
+          by hour, day, week, month, or year as the span allows (hourly for a week or less). Select
+          a whole area and it stays readable: the five busiest counters get their own lines and
+          everything else folds into a single “All others” series — with the busy lines painting
+          first while the long tail loads.
         </p>
         <figure>
           <img src="tour/graph-area.jpg" alt="Graph view for a wilderness area" loading="lazy" />
@@ -362,8 +364,8 @@
         </figure>
         <p>
           That’s the tour. <a href="https://demo.trailcount.io" target="_blank" rel="noopener">Open the demo</a>
-          and try it with months of simulated data across 500+ trailheads, see
-          <a href="https://adk.trailcount.io" target="_blank" rel="noopener">real counts from The Garden</a>,
+          and try it with simulated data across the park’s trailheads, see
+          <a href="https://adk.trailcount.io" target="_blank" rel="noopener">the live dashboard</a>,
           or <a href="mailto:contact@trailcount.io">get in touch</a>
           to talk about counting your trails.
         </p>
