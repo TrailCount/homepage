@@ -3,6 +3,22 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Google Analytics (TrailCount property). Loads only on production
+       *.trailcount.io hosts, not test- stacks or local dev. -->
+  <script>
+    (function (host) {
+      if (!/(^|\.)trailcount\.io$/.test(host) || /^test-/.test(host)) return;
+      var id = "G-MB9410HQSQ";
+      var s = document.createElement("script");
+      s.async = true;
+      s.src = "https://www.googletagmanager.com/gtag/js?id=" + id;
+      document.head.appendChild(s);
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = function () { window.dataLayer.push(arguments); };
+      window.gtag("js", new Date());
+      window.gtag("config", id);
+    })(location.hostname);
+  </script>
   <title>TrailCount — Product Tour</title>
   <link rel="icon" href="favicon.ico" sizes="any" />
   <link rel="icon" href="trailcount-icon.svg" type="image/svg+xml" />
