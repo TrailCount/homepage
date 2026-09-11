@@ -4,10 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#6a9e5e">
-  <title>TrailCount — Counting Hikers on Wilderness Trails</title>
+  <title>TrailCount — Data for the Stewards of Wild Places</title>
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link rel="icon" type="image/svg+xml" href="trailcount-icon.svg">
-  <meta name="description" content="TrailCount measures hiker traffic on wilderness trails so land stewards can understand how their trails are used. Sponsored by Adirondack Wilderness Advocates.">
+  <meta name="description" content="TrailCount builds data tools for the people who care for wild land: trail counters with a usage dashboard, plus public maps of remoteness, trail steepness, and private landholdings, starting in New York's Adirondack Park. Sponsored by Adirondack Wilderness Advocates.">
   <style>
     /* TrailCount palette:
        #6a9e5e primary green
@@ -65,6 +65,10 @@
       text-transform: uppercase;
       color: #4e8040;
       font-weight: 600;
+    }
+    .box-intro {
+      margin: 0 0 14px 0;
+      font-size: 1rem;
     }
     .deployment a {
       font-size: 1.2rem;
@@ -163,18 +167,19 @@
     <main>
       <h1>Understanding our footprint in wild places.</h1>
 
-      <p>TrailCount visualizes human usage patterns across pristine natural areas. Small, battery-powered counters observe quietly at the trailhead; the platform turns their daily reports into a living picture of where people go, when they go, and how use is shifting — so the people who care for these places can see impact forming while there is still time to act.</p>
+      <p>TrailCount builds data tools for the people who care for wild land, whether they work for a public agency or a private land trust. Good stewardship rests on evidence: how many people use a trail and when, how steep the ground is, how far a place sits from the nearest road, who holds the land around it. We gather that evidence, put it on a map, and make it easy to read — so decisions follow the land, not anecdote. The work begins in New York’s Adirondack Park.</p>
 
       <ul class="pillars">
-        <li><b>Measure unobtrusively.</b> Battery-powered sensors count passing hikers a season at a time and report in daily over cellular — no cameras, no wires, nothing asked of visitors.</li>
-        <li><b>See patterns, not anecdotes.</b> Usage flows across a living map and time-series views: hotspots, seasonal rhythms, and multi-year trends, per trail and per wilderness area.</li>
-        <li><b>Protect what is pristine.</b> Concentrated pressure surfaces early, so stewardship — trail hardening, education, rerouting — goes where the land needs it first.</li>
+        <li><b>Measure unobtrusively.</b> Battery-powered counters at the trailhead log each passing hiker and report in daily over cellular — no cameras, no wires, nothing asked of visitors.</li>
+        <li><b>See the whole landscape.</b> Visitor counts are one layer. Trail grades, distance from motorized access, and the pattern of public and private ownership are others, mapped from public data.</li>
+        <li><b>Protect what is pristine.</b> Crowded trails and shrinking remote core show up early, so stewardship — trail hardening, education, rerouting, protection — goes where the land needs it first.</li>
       </ul>
 
       <p>TrailCount is sponsored by Adirondack Wilderness Advocates and built in collaboration with RIT senior-project teams.</p>
 
       <div class="deployment">
-        <p class="deployment-label">To learn more</p>
+        <p class="deployment-label">Trail counting</p>
+        <p class="box-intro">Counters in the field and a dashboard to read them: usage heat along the trails, graphs of when people come, and totals you can export.</p>
         <a href="/tour.html">Take the product tour →</a><br>
         <a href="https://demo.trailcount.io">Explore the demo dashboard →</a><br>
         <a href="https://adk.trailcount.io">See the live dashboard →</a>
@@ -182,18 +187,19 @@
       </div>
 
       <div class="deployment">
-        <p class="deployment-label">Maps of the Park</p>
+        <p class="deployment-label">Maps of the Adirondack Park</p>
+        <p class="box-intro">Open to anyone — no sign-in needed to explore.</p>
         <p class="tool">
           <a href="https://remoteness.trailcount.io">Remoteness Explorer →</a>
-          <span class="deployment-note">How far is each acre of the Adirondack Park from the nearest motorized access — a road, ATV trail, snowmobile trail, or motorized water? Click a road out of the network and watch remote core grow or fragment.</span>
+          <span class="deployment-note">How far each acre of the Park is from the nearest road, ATV trail, snowmobile trail, or motorized water. Close a road or draw a new one and watch remote core grow or fragment.</span>
         </p>
         <p class="tool">
           <a href="https://steepness.trailcount.io">Steepness Explorer →</a>
-          <span class="deployment-note">DEC hiking trails coloured by grade, computed from USGS 3DEP along the same trail overlay the TrailCount map draws. Filter by unit, trail type, and a “hide gentler than” slider.</span>
+          <span class="deployment-note">DEC hiking trails colored by grade, computed from USGS elevation data. Filter by unit and trail type, or hide everything gentler than a grade you choose.</span>
         </p>
         <p class="tool">
           <a href="https://land.trailcount.io">Private Land Explorer →</a>
-          <span class="deployment-note">The other half of the Park: who holds the large private landholdings, grouped by parent company, with APA land class, conservation easements, and forest-tax commitments. Built from state parcel and assessment-roll data; private individuals are never named.</span>
+          <span class="deployment-note">The other half of the Park: who holds the large private landholdings, grouped by parent company, with APA land class, conservation easements, and forest-tax commitments.</span>
         </p>
       </div>
 
